@@ -70,7 +70,7 @@ pub fn download_part(
         // println!("thread {} : {} byts", part_num, downloaded_bytes);
 
         let _ = sender.send(PartStruct {
-            part_number: 0,
+            part_number: part_num,
             content: Bytes::new(),
             empty: true,
             progress: read_bytes.to_owned() as u64,

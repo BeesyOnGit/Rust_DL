@@ -1,5 +1,5 @@
 use std::{
-    fs::File,
+    fs::{create_dir_all, File},
     io::{self, Write},
 };
 
@@ -72,8 +72,9 @@ pub fn extract_file_name(url_str: &str) -> String {
     return file_name.to_string();
 }
 
-pub fn save_to_file(file_name: &str, bytes_vec: Vec<PartStruct>) -> bool {
-    let mut file = File::create(format!("C:/Users/THINKBOOK/Downloads/{}", file_name)).unwrap();
+pub fn save_to_file(path: &str, file_name: &str, bytes_vec: Vec<PartStruct>) -> bool {
+    let _dir_creation = create_dir_all(path).expect("erro while creation specified");
+    let mut file = File::create(file_name).unwrap();
     for part in bytes_vec {
         file.write_all(&part.content).unwrap();
     }
